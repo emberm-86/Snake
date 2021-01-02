@@ -19,7 +19,7 @@ public class Food {
     }
 
     public void paintFood(Graphics g) {
-        g.setColor(Color.RED);
+        g.setColor(Color.YELLOW);
         g.fillOval(x, y, FOOD_SIZE, FOOD_SIZE);
     }
 }

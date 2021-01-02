@@ -22,7 +22,7 @@ public class Snake extends ArrayList<Snake.SnakeBody> {
 
     public void paintSnake(Graphics g) {
         for (SnakeBody snakeBody : this) {
-            g.setColor(Color.GREEN);
+            g.setColor(Color.WHITE);
             snakeBody.paintSnakeBody(g);
         }
     }
