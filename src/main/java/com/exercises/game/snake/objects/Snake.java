@@ -1,4 +1,4 @@
-package com.games.snake.objects;
+package com.exercises.game.snake.objects;
 
 import java.awt.Color;
 import java.awt.Graphics;

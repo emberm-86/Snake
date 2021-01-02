@@ -1,8 +1,8 @@
-package com.games.snake.service;
+package com.exercises.game.snake.service;
 
-import com.games.snake.SnakeGamePanel;
-import com.games.snake.objects.Food;
-import com.games.snake.objects.Snake;
+import com.exercises.game.snake.objects.Food;
+import com.exercises.game.snake.SnakeGamePanel;
+import com.exercises.game.snake.objects.Snake;
 
 import java.util.Random;
 

@@ -1,4 +1,4 @@
-package com.games.snake.ui;
+package com.exercises.game.snake.ui;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;
