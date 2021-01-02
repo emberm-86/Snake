@@ -1,4 +1,4 @@
-package com.exercises.game.snake.objects;
+package com.examples.game.snake.objects;
 
 /**
  * Enum for checking in user navigation.

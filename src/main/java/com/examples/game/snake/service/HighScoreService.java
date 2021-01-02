@@ -1,6 +1,6 @@
-package com.exercises.game.snake.service;
+package com.examples.game.snake.service;
 
-import com.exercises.game.snake.ui.CustomDialog;
+import com.examples.game.snake.ui.CustomDialog;
 
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;

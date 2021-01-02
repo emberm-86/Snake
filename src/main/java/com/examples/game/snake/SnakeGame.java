@@ -1,4 +1,4 @@
-package com.exercises.game.snake;
+package com.examples.game.snake;
 
 import javax.swing.JFrame;
 import java.awt.BorderLayout;

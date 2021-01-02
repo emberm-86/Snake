@@ -1,10 +1,10 @@
-package com.exercises.game.snake;
+package com.examples.game.snake;
 
-import com.exercises.game.snake.objects.Food;
-import com.exercises.game.snake.objects.GameState;
-import com.exercises.game.snake.objects.Snake;
-import com.exercises.game.snake.service.FoodGenerationService;
-import com.exercises.game.snake.service.HighScoreService;
+import com.examples.game.snake.objects.Food;
+import com.examples.game.snake.objects.GameState;
+import com.examples.game.snake.objects.Snake;
+import com.examples.game.snake.service.FoodGenerationService;
+import com.examples.game.snake.service.HighScoreService;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
