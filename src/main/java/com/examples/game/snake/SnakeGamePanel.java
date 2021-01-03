@@ -28,6 +28,9 @@ public class SnakeGamePanel extends JPanel {
     public static final int SNAKE_WINDOW_WIDTH = 600;
     public static final int SNAKE_WINDOW_HEIGHT = 600;
 
+    public static final Color BACKGROUND_COLOR = Color.BLACK;
+    public static final Color MENU_COLOR = Color.WHITE;
+
     public static final int DELAY = 60;
 
     private Snake snake;
@@ -42,7 +45,7 @@ public class SnakeGamePanel extends JPanel {
     private DIRECTION actDir;
 
     SnakeGamePanel(JFrame mainFrame) {
-        setBackground(Color.BLACK);
+        setBackground(BACKGROUND_COLOR);
         setPreferredSize(new Dimension(SNAKE_WINDOW_WIDTH,
                 SNAKE_WINDOW_HEIGHT));
 
@@ -108,7 +111,7 @@ public class SnakeGamePanel extends JPanel {
         snake.paintSnake(g);
         food.paintFood(g);
 
-        g.setColor(Color.WHITE);
+        g.setColor(MENU_COLOR);
         g.setFont(new Font("default", Font.BOLD, 12));
         g.drawString("SCORE: " + counter, 10, 40);
 
@@ -143,7 +146,7 @@ public class SnakeGamePanel extends JPanel {
      * Showing the main menu in the repaint.
      */
     private void showMenu(Graphics g) {
-        g.setColor(Color.WHITE);
+        g.setColor(MENU_COLOR);
         g.setFont(new Font("default", Font.BOLD, 16));
 
         g.drawString("1. START GAME",

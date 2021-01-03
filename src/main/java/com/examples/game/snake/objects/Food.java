@@ -8,6 +8,7 @@ import java.awt.Graphics;
  */
 public class Food {
 
+    private static final Color FOOD_COLOR = Color.YELLOW;
     public static final int FOOD_SIZE = 3 * Snake.SNAKE_BODY_SIZE / 4;
 
     public int x;
@@ -19,7 +20,7 @@ public class Food {
     }
 
     public void paintFood(Graphics g) {
-        g.setColor(Color.YELLOW);
+        g.setColor(FOOD_COLOR);
         g.fillOval(x, y, FOOD_SIZE, FOOD_SIZE);
     }
 }

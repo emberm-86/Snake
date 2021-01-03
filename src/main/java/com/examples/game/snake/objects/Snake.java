@@ -11,6 +11,7 @@ public class Snake extends ArrayList<Snake.SnakeBody> {
 
     private static final long serialVersionUID = 1L;
 
+    private static final Color SNAKE_COLOR = Color.GREEN;
     public static final int SNAKE_BODY_SIZE = 20;
 
     public Snake() {
@@ -50,7 +51,7 @@ public class Snake extends ArrayList<Snake.SnakeBody> {
         }
 
         public void paintSnakeBody(Graphics g) {
-            g.setColor(Color.GREEN);
+            g.setColor(SNAKE_COLOR);
             g.fillOval(x, y, SNAKE_BODY_SIZE, SNAKE_BODY_SIZE);
         }
     }
