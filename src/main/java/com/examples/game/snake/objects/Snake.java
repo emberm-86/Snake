@@ -22,8 +22,9 @@ public class Snake extends ArrayList<Snake.SnakeBody> {
     }
 
     public void paintSnake(Graphics g) {
+        g.setColor(SNAKE_COLOR);
+
         for (SnakeBody snakeBody : this) {
-            g.setColor(Color.WHITE);
             snakeBody.paintSnakeBody(g);
         }
     }
@@ -51,7 +52,6 @@ public class Snake extends ArrayList<Snake.SnakeBody> {
         }
 
         public void paintSnakeBody(Graphics g) {
-            g.setColor(SNAKE_COLOR);
             g.fillOval(x, y, SNAKE_BODY_SIZE, SNAKE_BODY_SIZE);
         }
     }
