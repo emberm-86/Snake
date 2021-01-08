@@ -11,9 +11,9 @@ import java.util.Random;
  */
 public class FoodGenerationService {
 
-    private static final Random ran = new Random();
+    private final Random ran = new Random();
 
-    public static Food generateFood(Snake snake) {
+    public Food generateFood(Snake snake) {
 
         boolean isInSnake = false;
 

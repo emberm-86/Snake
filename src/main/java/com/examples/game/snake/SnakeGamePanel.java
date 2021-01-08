@@ -4,7 +4,7 @@ import com.examples.game.snake.objects.Food;
 import com.examples.game.snake.objects.GameState;
 import com.examples.game.snake.objects.Snake;
 import com.examples.game.snake.service.FoodGenerationService;
-import com.examples.game.snake.service.HighScoreService;
+import com.examples.game.snake.util.HighScoreUtil;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -35,6 +35,7 @@ public class SnakeGamePanel extends JPanel {
 
     private Snake snake;
     private Food food;
+    private final FoodGenerationService foodGenerationService;
 
     private int counter;
     private boolean gameOver;
@@ -44,12 +45,15 @@ public class SnakeGamePanel extends JPanel {
 
     private DIRECTION actDir;
 
-    SnakeGamePanel(JFrame mainFrame) {
+    SnakeGamePanel(JFrame mainFrame,
+                   FoodGenerationService foodGenerationService) {
+
         setBackground(BACKGROUND_COLOR);
         setPreferredSize(new Dimension(SNAKE_WINDOW_WIDTH,
                 SNAKE_WINDOW_HEIGHT));
 
-        gameState = GameState.MAIN_MENU;
+        this.foodGenerationService = foodGenerationService;
+        this.gameState = GameState.MAIN_MENU;
 
         // The menu handling is defined here.
         mainFrame.addKeyListener(new KeyAdapter() {
@@ -75,7 +79,7 @@ public class SnakeGamePanel extends JPanel {
                         SnakeMove snakeMove = new SnakeMove();
 
                         CompletableFuture.runAsync(snakeMove)
-                                .thenRun(() -> HighScoreService
+                                .thenRun(() -> HighScoreUtil
                                         .showNewHighScoreEntryDialog(
                                                 mainFrame.getRootPane(),
                                                 counter));
@@ -83,7 +87,7 @@ public class SnakeGamePanel extends JPanel {
                     }
 
                     case '2': {
-                        HighScoreService
+                        HighScoreUtil
                                 .showHighScores(mainFrame.getRootPane());
                         break;
                     }
@@ -137,7 +141,7 @@ public class SnakeGamePanel extends JPanel {
         counter = 0;
 
         snake = new Snake();
-        food = FoodGenerationService.generateFood(snake);
+        food = foodGenerationService.generateFood(snake);
 
         actDir = DIRECTION.RIGHT;
     }
@@ -293,7 +297,7 @@ public class SnakeGamePanel extends JPanel {
 
                     snake.addTail(snakeTailX, snakeTailY);
 
-                    food = FoodGenerationService.generateFood(snake);
+                    food = foodGenerationService.generateFood(snake);
                 }
 
                 repaint();
