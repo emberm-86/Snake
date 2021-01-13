@@ -224,11 +224,11 @@ public class SnakeGamePanel extends JPanel {
     }
 
     /**
-     * This Runnable class represents the thread definition
-     * of the movement of the snake.
+     * This Runnable class represents the task definition
+     * of the snake's movement.
      * We feed the snake here and check
-     * if is collided to the boundaries of the screen
-     * or if it is turned into itself.
+     * if it collides into the bounds of the screen
+     * or it turns into itself.
      */
     class SnakeMove implements Runnable {
 
