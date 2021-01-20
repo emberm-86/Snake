@@ -2,6 +2,8 @@
 
 Big classic Snake game.
 
+<img src="videos/Snake_demo.gif" alt="Check the video" width="50%" height="50%"/>
+
 The current version(v1.0) contains only one level
 in the game session.
 
