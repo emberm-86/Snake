@@ -11,42 +11,33 @@ import java.util.Random;
  */
 public class FoodGenerationService {
 
-    private final Random ran = new Random();
+  private final Random ran = new Random();
 
-    public Food generateFood(Snake snake) {
+  public Food generateFood(Snake snake) {
+    boolean isInSnake = false;
+    int x = 1;
+    int y = 1;
 
-        boolean isInSnake = false;
+    while (!(x % Snake.SNAKE_BODY_SIZE == 0 && y % Snake.SNAKE_BODY_SIZE == 0 && !isInSnake)) {
+      x = ran.nextInt(SnakeGamePanel.SNAKE_WINDOW_WIDTH
+          - Snake.SNAKE_BODY_SIZE) + Snake.SNAKE_BODY_SIZE;
 
-        int x = 1;
-        int y = 1;
+      y = ran.nextInt(SnakeGamePanel.SNAKE_WINDOW_HEIGHT
+          - Snake.SNAKE_BODY_SIZE) + Snake.SNAKE_BODY_SIZE;
 
-        while (!(x % Snake.SNAKE_BODY_SIZE == 0
-                && y % Snake.SNAKE_BODY_SIZE == 0 && !isInSnake)) {
+      isInSnake = false;
 
-            x = ran.nextInt(SnakeGamePanel.SNAKE_WINDOW_WIDTH
-                    - Snake.SNAKE_BODY_SIZE) + Snake.SNAKE_BODY_SIZE;
-
-            y = ran.nextInt(SnakeGamePanel.SNAKE_WINDOW_HEIGHT
-                    - Snake.SNAKE_BODY_SIZE) + Snake.SNAKE_BODY_SIZE;
-
-            isInSnake = false;
-
-            for (Snake.SnakeBody snakeBody : snake) {
-
-                if (snakeBody.x - Snake.SNAKE_BODY_SIZE <= x &&
-                        snakeBody.x + Snake.SNAKE_BODY_SIZE >= x &&
-                        snakeBody.y - Snake.SNAKE_BODY_SIZE <= y &&
-                        snakeBody.y + Snake.SNAKE_BODY_SIZE >= y) {
-
-                    isInSnake = true;
-                    break;
-                }
-            }
+      for (Snake.SnakeBody snakeBody : snake) {
+        if (snakeBody.x - Snake.SNAKE_BODY_SIZE <= x && snakeBody.x + Snake.SNAKE_BODY_SIZE >= x &&
+            snakeBody.y - Snake.SNAKE_BODY_SIZE <= y && snakeBody.y + Snake.SNAKE_BODY_SIZE >= y) {
+          isInSnake = true;
+          break;
         }
-
-        x += (Snake.SNAKE_BODY_SIZE - Food.FOOD_SIZE) / 2;
-        y += (Snake.SNAKE_BODY_SIZE - Food.FOOD_SIZE) / 2;
-
-        return new Food(x, y);
+      }
     }
+
+    x += (Snake.SNAKE_BODY_SIZE - Food.FOOD_SIZE) / 2;
+    y += (Snake.SNAKE_BODY_SIZE - Food.FOOD_SIZE) / 2;
+    return new Food(x, y);
+  }
 }

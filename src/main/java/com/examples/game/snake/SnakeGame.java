@@ -12,28 +12,27 @@ import java.awt.BorderLayout;
  */
 public class SnakeGame extends JFrame {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    private static final String GAME_TITLE = "Snake v1.0";
+  private static final String GAME_TITLE = "Snake v1.0";
 
-    public SnakeGame(int x, int y) {
-        setLayout(new BorderLayout());
-        setLocation(x, y);
-        setTitle(GAME_TITLE);
+  public SnakeGame(int x, int y) {
+    setLayout(new BorderLayout());
+    setLocation(x, y);
+    setTitle(GAME_TITLE);
 
-        SnakeGamePanel panel = new SnakeGamePanel(this,
-                new FoodGenerationService());
+    SnakeGamePanel panel = new SnakeGamePanel(this, new FoodGenerationService());
 
-        add(panel, BorderLayout.CENTER);
-        addKeyListener(panel.new KeyControl());
-        pack();
+    add(panel, BorderLayout.CENTER);
+    addKeyListener(panel.new KeyControl());
+    pack();
 
-        setVisible(true);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
+    setVisible(true);
+    setLocationRelativeTo(null);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  }
 
-    public static void main(String[] args) {
-        new SnakeGame(100, 200);
-    }
+  public static void main(String[] args) {
+    new SnakeGame(100, 200);
+  }
 }
