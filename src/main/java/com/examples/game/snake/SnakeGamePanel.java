@@ -5,16 +5,17 @@ import com.examples.game.snake.objects.GameState;
 import com.examples.game.snake.objects.Snake;
 import com.examples.game.snake.service.FoodGenerationService;
 import com.examples.game.snake.util.HighScoreUtil;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.IntStream;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  * Snake game panel: game window + thread.
@@ -41,6 +42,7 @@ public class SnakeGamePanel extends JPanel {
   private GameState gameState;
 
   private enum DIRECTION {DOWN, LEFT, RIGHT, UP}
+
   private DIRECTION actDir;
 
   SnakeGamePanel(JFrame mainFrame, FoodGenerationService foodGenerationService) {
@@ -49,7 +51,6 @@ public class SnakeGamePanel extends JPanel {
     this.foodGenerationService = foodGenerationService;
     this.gameState = GameState.MAIN_MENU;
 
-    // The menu handling is defined here.
     mainFrame.addKeyListener(new KeyAdapter() {
 
       @Override
@@ -58,7 +59,7 @@ public class SnakeGamePanel extends JPanel {
           return;
         }
 
-        if (gameState == GameState.FINISHED && e.getKeyChar() != 'x') {
+        if (gameState == GameState.FINISHED && e.getKeyChar() != '3') {
           return;
         }
 
@@ -78,13 +79,13 @@ public class SnakeGamePanel extends JPanel {
           }
 
           case '3': {
-            System.exit(0);
+            gameState = GameState.MAIN_MENU;
+            repaint();
             break;
           }
 
           case 'x': {
-            gameState = GameState.MAIN_MENU;
-            repaint();
+            System.exit(0);
             break;
           }
         }
@@ -99,7 +100,6 @@ public class SnakeGamePanel extends JPanel {
     snake.paintSnake(g);
     food.paintFood(g);
 
-
     g.setColor(MENU_COLOR);
     g.setFont(SMALLER_FONT);
     g.drawString("SCORE: " + counter, 10, 40);
@@ -109,8 +109,8 @@ public class SnakeGamePanel extends JPanel {
       g.drawString("GAME OVER!",
           SNAKE_WINDOW_WIDTH / 2 - 2 * Snake.SNAKE_BODY_SIZE - 15, SNAKE_WINDOW_HEIGHT / 2);
       g.setFont(SMALLER_FONT);
-      g.drawString("PRESS X TO RETURN TO THE MAIN MENU",
-          SNAKE_WINDOW_WIDTH / 2 - 120, SNAKE_WINDOW_HEIGHT / 2 + 65);
+      g.drawString("PRESS '3' TO RETURN TO THE MAIN MENU.",
+          SNAKE_WINDOW_WIDTH / 2 - 110, SNAKE_WINDOW_HEIGHT / 2 + 65);
     }
   }
 
@@ -132,11 +132,9 @@ public class SnakeGamePanel extends JPanel {
     g.setColor(MENU_COLOR);
     g.setFont(BIGGER_FONT);
 
-    int offset = 65;
-    g.drawString("1. START GAME", SNAKE_WINDOW_WIDTH / 2 - offset, 150);
-    g.drawString("2. HIGH SCORES", SNAKE_WINDOW_WIDTH / 2 - offset, 200);
-    g.drawString("3. EXIT", SNAKE_WINDOW_WIDTH / 2 - offset, 250);
-    g.drawString("x. MAIN MENU", SNAKE_WINDOW_WIDTH / 2 - offset, 300);
+    List<String> menuOpts = List.of("1. START GAME", "2. HIGH SCORES", "3. MAIN MENU", "x. EXIT");
+    IntStream.range(0, menuOpts.size())
+        .forEach(i -> g.drawString(menuOpts.get(i), SNAKE_WINDOW_WIDTH / 2 - 65, 150 + i * 50));
   }
 
   /**
@@ -205,8 +203,8 @@ public class SnakeGamePanel extends JPanel {
     public void run() {
       boolean rolledIn = false;
 
-      while (snake.getHead().x >= 0 && snake.getHead().x < SNAKE_WINDOW_WIDTH &&
-          snake.getHead().y >= 0 && snake.getHead().y < SNAKE_WINDOW_HEIGHT && !rolledIn) {
+      while (snake.getHead().x >= 0 && snake.getHead().x < SNAKE_WINDOW_WIDTH
+          && snake.getHead().y >= 0 && snake.getHead().y < SNAKE_WINDOW_HEIGHT && !rolledIn) {
         int snakeHeadIndex = snake.getHeadIndex();
 
         for (int i = 0; i < snakeHeadIndex; i++) {
@@ -235,8 +233,7 @@ public class SnakeGamePanel extends JPanel {
         }
 
         for (int i = 0; i < snakeHeadIndex; i++) {
-          if (snakeHead.x == snake.get(i).x &&
-              snakeHead.y == snake.get(i).y) {
+          if (snakeHead.x == snake.get(i).x && snakeHead.y == snake.get(i).y) {
             rolledIn = true;
             break;
           }
@@ -263,6 +260,7 @@ public class SnakeGamePanel extends JPanel {
           throw new RuntimeException(e.getLocalizedMessage(), e);
         }
       }
+
       gameOver = true;
       repaint();
       gameState = GameState.FINISHED;

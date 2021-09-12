@@ -19,11 +19,11 @@ public class FoodGenerationService {
     int y = 1;
 
     while (!(x % Snake.SNAKE_BODY_SIZE == 0 && y % Snake.SNAKE_BODY_SIZE == 0 && !isInSnake)) {
-      x = ran.nextInt(SnakeGamePanel.SNAKE_WINDOW_WIDTH
-          - Snake.SNAKE_BODY_SIZE) + Snake.SNAKE_BODY_SIZE;
+      x = ran.nextInt(SnakeGamePanel.SNAKE_WINDOW_WIDTH - Snake.SNAKE_BODY_SIZE)
+          + Snake.SNAKE_BODY_SIZE;
 
-      y = ran.nextInt(SnakeGamePanel.SNAKE_WINDOW_HEIGHT
-          - Snake.SNAKE_BODY_SIZE) + Snake.SNAKE_BODY_SIZE;
+      y = ran.nextInt(SnakeGamePanel.SNAKE_WINDOW_HEIGHT - Snake.SNAKE_BODY_SIZE)
+          + Snake.SNAKE_BODY_SIZE;
 
       isInSnake = false;
 
@@ -38,6 +38,7 @@ public class FoodGenerationService {
 
     x += (Snake.SNAKE_BODY_SIZE - Food.FOOD_SIZE) / 2;
     y += (Snake.SNAKE_BODY_SIZE - Food.FOOD_SIZE) / 2;
+
     return new Food(x, y);
   }
 }
